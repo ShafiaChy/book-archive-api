@@ -40,6 +40,7 @@ const displayBookResult = (bookData,docs) => {
    if(docs.length === 0){
     
      showErrorMessage('No results found');
+     document.getElementById('result-heading').style.display='none';
         
    }
    else{
