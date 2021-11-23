@@ -32,7 +32,8 @@ const showErrorMessage = err => {
 }
  
 //Showing the results found from the fetched url with help of an arrow function
-const displayBookResult = (bookData,docs) => {
+const displayBookResult = (bookData, docs) => {
+  console.log(docs)
    const searchResult = document.getElementById('search-result');
    //removing previous results
    searchResult.textContent='';
@@ -92,7 +93,7 @@ const displayBookResult = (bookData,docs) => {
             <div class="card h-100 w-75">
                 <div ><img id="search-img" src="${image}" class="card-img-top" alt="..."></div>
                 <div class="card-body">
-                    <h5 class="card-title">${doc.text[1]}</h5>
+                    <h5 class="card-title">${doc.title}</h5>
                     <h6><span class = "fw-bold">Author:</span> ${author_name}</h6>
                     <h6><span class = "fw-bold">Publisher:</span> ${publisher}</h6>
                     <small><span class = "fw-bold">First Published Date:</span> ${published_date}</small>
