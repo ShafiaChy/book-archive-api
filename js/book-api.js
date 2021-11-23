@@ -1,6 +1,7 @@
 // To hide Error message before any ocurrence of errors
 document.getElementById('error-message').style.display = 'none';
 
+
 // To hide total results found before clicking the search button
 document.getElementById('result-heading').style.display='none';
 
@@ -11,8 +12,13 @@ const searchForBook = () => {
     console.log(searchText);
     searchId.value = '';
     document.getElementById('error-message').style.display = 'none';
+    
     if(searchText === ''){
+        const searchResult = document.getElementById('search-result');
+        //removing previous results
+        searchResult.textContent='';
         showErrorMessage('Please, write the name of the book you are looking for.');
+        
     }
     else{
         fetch(`https://openlibrary.org/search.json?q=${searchText}`)
@@ -26,18 +32,25 @@ const searchForBook = () => {
 
 //Displaying error if there is any with help of an arrow function
 const showErrorMessage = err => {
-
+    
     document.getElementById('error-message').style.display = 'block';
     document.getElementById('error-message').innerText = err;
+    document.getElementById('error-message').style.color = 'red';
+    document.getElementById('result-heading').style.display='none';
+  
+
+    
+        
 }
  
 //Showing the results found from the fetched url with help of an arrow function
 const displayBookResult = (bookData, docs) => {
   console.log(docs)
    const searchResult = document.getElementById('search-result');
+  
    //removing previous results
    searchResult.textContent='';
-
+   document.getElementById('error-message').style.display = 'block';
    //checking if the search field is empty or not
    if(docs.length === 0){
     
@@ -49,7 +62,8 @@ const displayBookResult = (bookData, docs) => {
     //displaying the total search results
     document.getElementById('result-heading').style.display='block';
     document.getElementById('result-found').innerText = bookData.numFound ;
-    
+    document.getElementById('error-message').style.display = 'none';
+   
     docs.forEach(doc => {
         const cover_i = doc.cover_i; 
         let author_name ='';
@@ -74,7 +88,7 @@ const displayBookResult = (bookData, docs) => {
             published_date = doc.first_publish_yearr;
         }
         else{
-            ublished_date = 'NIL';
+            published_date = 'NIL';
         }
 
         //checking if there is image available or not
@@ -103,6 +117,7 @@ const displayBookResult = (bookData, docs) => {
         searchResult.appendChild(div);
              
     })
+
   } 
 }
 
