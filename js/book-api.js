@@ -8,6 +8,7 @@ document.getElementById('result-heading').style.display='none';
 const searchForBook = () => {
     const searchId = document.getElementById('search-field');
     const searchText = searchId.value;
+    console.log(searchText);
     searchId.value = '';
     document.getElementById('error-message').style.display = 'none';
     if(searchText === ''){
